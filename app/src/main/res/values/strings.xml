@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RSSNewsReader</string>
+    <string name="connection_error">Failed to connect</string>
+    <string name="xml_error">Error Xml</string>
+    <string name="page_title">RSS</string>
+    <string name="updated">d</string>
 </resources>
