@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             // Create a progressbar
             pDialog = new ProgressDialog(MainActivity.this);
             // Set progressbar title
-            pDialog.setTitle("Android Simple XML Parsing using DOM Tutorial");
+            pDialog.setTitle("fetching RSSFeed headlines.");
             // Set progressbar message
             pDialog.setMessage("Loading...");
             pDialog.setIndeterminate(false);
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void args) {
             int dd = nodelist.getLength();
-            Toast.makeText(MainActivity.this, "This is my" + dd,
+            Toast.makeText(MainActivity.this,dd + " RSSFeed Headlines Fetched.",
                     Toast.LENGTH_LONG).show();
 
 
