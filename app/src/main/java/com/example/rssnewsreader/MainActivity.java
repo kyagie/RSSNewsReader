@@ -2,13 +2,130 @@ package com.example.rssnewsreader;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 public class MainActivity extends AppCompatActivity {
+    private NodeList nodelist;
+    private TextView textWord;
+    ProgressDialog pDialog;
+    private String uri = "https://news.yahoo.com/rss/topstories";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (android.os.Build.VERSION.SDK_INT > 20) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+
+
+        initVar();
+//        DownloadXML
+        new DownloadXML().execute(uri);
+
+    }
+
+
+
+    public void initVar(){
+        textWord = (TextView)findViewById(R.id.textWord);
+    }
+    // DownloadXML AsyncTask
+    private class DownloadXML extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Create a progressbar
+            pDialog = new ProgressDialog(MainActivity.this);
+            // Set progressbar title
+            pDialog.setTitle("Android Simple XML Parsing using DOM Tutorial");
+            // Set progressbar message
+            pDialog.setMessage("Loading...");
+            pDialog.setIndeterminate(false);
+            // Show progressbar
+            pDialog.show();
+        }
+//
+        @Override
+        protected Void doInBackground(String... Url) {
+            try {
+                URL url = new URL(Url[0]);
+                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                DocumentBuilder db = dbf.newDocumentBuilder();
+                // Download the XML file
+                Document doc = db.parse(new InputSource(url.openStream()));
+                doc.getDocumentElement().normalize();
+                // Locate the Tag Name
+                nodelist = doc.getElementsByTagName("item");
+
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(Void args) {
+            int dd = nodelist.getLength();
+            Toast.makeText(MainActivity.this, "This is my" + dd,
+                    Toast.LENGTH_LONG).show();
+
+
+            for (int temp = 0; temp < nodelist.getLength(); temp++) {
+                Node nNode = nodelist.item(temp);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    // Set the texts into TextViews from item nodes
+                    // Get the title
+                    textWord.setText(textWord.getText() + "Title : "
+                            + getNode("title", eElement) + "\n" + "\n");
+//                    // Get the description
+//                    textWord.setText(textWord.getText() + "source : "
+//                            + getNode("source ", eElement) + "\n" + "\n");
+                    // Get the link
+                    textWord.setText(textWord.getText() + "Link : "
+                            + getNode("link", eElement) + "\n" + "\n");
+                    // Get the date
+                    textWord.setText(textWord.getText() + "Date : "
+                            + getNode("pubDate", eElement) + "\n" + "\n" + "\n"
+                            + "\n");
+                }
+            }
+//            // Close progressbar
+            pDialog.dismiss();
+        }
+
+    }
+//     getNode function
+    private static String getNode(String sTag, Element eElement) {
+        NodeList nlList = eElement.getElementsByTagName(sTag).item(0)
+                .getChildNodes();
+        Node nValue = (Node) nlList.item(0);
+        return nValue.getNodeValue();
     }
 }
