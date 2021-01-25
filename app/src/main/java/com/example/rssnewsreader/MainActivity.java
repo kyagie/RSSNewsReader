@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void args) {
             int dd = nodelist.getLength();
-            Toast.makeText(MainActivity.this,dd + " RSSFeed Headlines Fetched.",
+            Toast.makeText(MainActivity.this,dd +" "+ " RSSFeed Headlines Fetched.",
                     Toast.LENGTH_LONG).show();
             for (int temp = 0; temp < nodelist.getLength(); temp++) {
                 Node nNode = nodelist.item(temp);
