@@ -18,6 +18,8 @@ import org.xml.sax.InputSource;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -46,6 +48,25 @@ public class MainActivity extends AppCompatActivity {
     public void initVar(){
         textWord = (TextView)findViewById(R.id.textWord);
     }
+    public static Iterable<Node> iterable(final NodeList nodeList) {
+        return () -> new Iterator<Node>() {
+
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < nodeList.getLength();
+            }
+
+            @Override
+            public Node next() {
+                if (!hasNext())
+                    throw new NoSuchElementException();
+                return nodeList.item(index++);
+            }
+        };
+    }
+
     // DownloadXML AsyncTask
     private class DownloadXML extends AsyncTask<String, Void, Void> {
         @Override
@@ -86,26 +107,43 @@ public class MainActivity extends AppCompatActivity {
             int dd = nodelist.getLength();
             Toast.makeText(MainActivity.this,dd +" "+ " RSSFeed Headlines Fetched.",
                     Toast.LENGTH_LONG).show();
-            for (int temp = 0; temp < nodelist.getLength(); temp++) {
-                Node nNode = nodelist.item(temp);
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    // Set the texts into TextViews from item nodes
-                    // Get the title
-                    textWord.setText(textWord.getText() + "Title : "
-                            + getNode("title", eElement) + "\n" + "\n");
-//                    // Get the description
-//                    textWord.setText(textWord.getText() + "source : "
-//                            + getNode("source ", eElement) + "\n" + "\n");
-                    // Get the link
-                    textWord.setText(textWord.getText() + "Link : "
-                            + getNode("link", eElement) + "\n" + "\n");
-                    // Get the date
-                    textWord.setText(textWord.getText() + "Date : "
-                            + getNode("pubDate", eElement) + "\n" + "\n" + "\n"
-                            + "\n");
+
+//            NodeList nodeList = ...;
+            for (Node node : iterable(nodelist)) {
+                if (node.getNodeType() == Node.ELEMENT_NODE){
+                    Element eElement = (Element) node;
+//                    textWord.setText(textWord.getText() + "Title : "
+//                            + getNode("title", eElement) + "\n" + "\n");
+
+
+
+
+
                 }
             }
+
+
+
+//            for (int temp = 0; temp < nodelist.getLength(); temp++) {
+//                Node nNode = nodelist.item(temp);
+//                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+//                    Element eElement = (Element) nNode;
+//                    // Set the texts into TextViews from item nodes
+//                    // Get the title
+//                    textWord.setText(textWord.getText() + "Title : "
+//                            + getNode("title", eElement) + "\n" + "\n");
+////                    // Get the description
+////                    textWord.setText(textWord.getText() + "source : "
+////                            + getNode("source ", eElement) + "\n" + "\n");
+//                    // Get the link
+//                    textWord.setText(textWord.getText() + "Link : "
+//                            + getNode("link", eElement) + "\n" + "\n");
+//                    // Get the date
+//                    textWord.setText(textWord.getText() + "Date : "
+//                            + getNode("pubDate", eElement) + "\n" + "\n" + "\n"
+//                            + "\n");
+//                }
+//            }
 //            // Close progressbar
             pDialog.dismiss();
         }
