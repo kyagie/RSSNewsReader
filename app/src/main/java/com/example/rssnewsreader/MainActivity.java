@@ -38,30 +38,23 @@ public class MainActivity extends AppCompatActivity {
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-
-
-
         initVar();
 //        DownloadXML
         new DownloadXML().execute(uri);
 
     }
-
-
-
     public void initVar(){
         textWord = (TextView)findViewById(R.id.textWord);
     }
     // DownloadXML AsyncTask
     private class DownloadXML extends AsyncTask<String, Void, Void> {
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             // Create a progressbar
             pDialog = new ProgressDialog(MainActivity.this);
             // Set progressbar title
-            pDialog.setTitle("fetching RSSFeed headlines.");
+            pDialog.setTitle("Fetching RSSFeed headlines.");
             // Set progressbar message
             pDialog.setMessage("Loading...");
             pDialog.setIndeterminate(false);
@@ -86,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             return null;
-
         }
 
         @Override
@@ -94,8 +86,6 @@ public class MainActivity extends AppCompatActivity {
             int dd = nodelist.getLength();
             Toast.makeText(MainActivity.this,dd + " RSSFeed Headlines Fetched.",
                     Toast.LENGTH_LONG).show();
-
-
             for (int temp = 0; temp < nodelist.getLength(); temp++) {
                 Node nNode = nodelist.item(temp);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
