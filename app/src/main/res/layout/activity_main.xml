@@ -50,7 +50,8 @@
                             android:id="@+id/title"
                             android:textAppearance="?attr/textAppearanceBody1"
                             android:textColor="@color/black"
-
+                            android:clickable="true"
+                            android:onClick="onClick"
                             />
 <!--                        <TextView-->
 <!--                            android:layout_width="wrap_content"-->

@@ -54,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
         link = (TextView)findViewById(R.id.link);
 
     }
+    public void onClick() {
+//            ...
+
+    }
+
     public static Iterable<Node> iterable(final NodeList nodeList) {
         return () -> new Iterator<Node>() {
 
