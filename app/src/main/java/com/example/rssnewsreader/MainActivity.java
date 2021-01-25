@@ -4,11 +4,13 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,10 +56,7 @@ public class MainActivity extends AppCompatActivity {
         link = (TextView)findViewById(R.id.link);
 
     }
-    public void onClick() {
-//            ...
 
-    }
 
     public static Iterable<Node> iterable(final NodeList nodeList) {
         return () -> new Iterator<Node>() {
@@ -136,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                     Element eElement = (Element) node;
 
                     title.setText(title.getText() + getNode("title", eElement) + "\n" + "\n");
-//                    title.setText(title.getText() + getNode("link", eElement) + "\n" + "\n");
+                    link.setText(link.getText() + getNode("link", eElement) + "\n" + "\n");
 
                 }
             }
@@ -152,5 +151,14 @@ public class MainActivity extends AppCompatActivity {
                 .getChildNodes();
         Node nValue = (Node) nlList.item(0);
         return nValue.getNodeValue();
+    }
+    public void onClick(View view) {
+//            ...
+        Intent intent = new Intent(this, NewsDetailsActivity.class);
+        link = (TextView)findViewById(R.id.link);
+        String Link = link.getText().toString();
+        intent.putExtra("HEADLINE_URL", Link);
+        startActivity(intent);
+
     }
 }
