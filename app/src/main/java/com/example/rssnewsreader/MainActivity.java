@@ -1,9 +1,11 @@
 package com.example.rssnewsreader;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -26,7 +28,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class MainActivity extends AppCompatActivity {
     private NodeList nodelist;
-    private TextView textWord;
+    private TextView textWord, title, pubdate, link;
     ProgressDialog pDialog;
     private String uri = "https://news.yahoo.com/rss/topstories";
 
@@ -47,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void initVar(){
         textWord = (TextView)findViewById(R.id.textWord);
+        title = (TextView)findViewById(R.id.title);
+//        pubdate = (TextView)findViewById(R.id.pubdate);
+        link = (TextView)findViewById(R.id.link);
+
     }
     public static Iterable<Node> iterable(final NodeList nodeList) {
         return () -> new Iterator<Node>() {
@@ -102,49 +108,35 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         protected void onPostExecute(Void args) {
             int dd = nodelist.getLength();
             Toast.makeText(MainActivity.this,dd +" "+ " RSSFeed Headlines Fetched.",
                     Toast.LENGTH_LONG).show();
 
-//            NodeList nodeList = ...;
+//            iterable(nodelist).forEach(node -> {
+//                if (node.getNodeType() == Node.ELEMENT_NODE){
+//                    Element eElement = (Element) node;
+//
+//                title.setText(title.getText() + getNode("title", eElement) + "\n" + "\n");
+//                link.setText(link.getText() + getNode("link", eElement) + "\n" + "\n");
+//
+//                }
+//                });
             for (Node node : iterable(nodelist)) {
+                // ....
+
                 if (node.getNodeType() == Node.ELEMENT_NODE){
                     Element eElement = (Element) node;
-//                    textWord.setText(textWord.getText() + "Title : "
-//                            + getNode("title", eElement) + "\n" + "\n");
 
-
-
-
+                    title.setText(title.getText() + getNode("title", eElement) + "\n" + "\n");
+//                    title.setText(title.getText() + getNode("link", eElement) + "\n" + "\n");
 
                 }
             }
 
 
-
-//            for (int temp = 0; temp < nodelist.getLength(); temp++) {
-//                Node nNode = nodelist.item(temp);
-//                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-//                    Element eElement = (Element) nNode;
-//                    // Set the texts into TextViews from item nodes
-//                    // Get the title
-//                    textWord.setText(textWord.getText() + "Title : "
-//                            + getNode("title", eElement) + "\n" + "\n");
-////                    // Get the description
-////                    textWord.setText(textWord.getText() + "source : "
-////                            + getNode("source ", eElement) + "\n" + "\n");
-//                    // Get the link
-//                    textWord.setText(textWord.getText() + "Link : "
-//                            + getNode("link", eElement) + "\n" + "\n");
-//                    // Get the date
-//                    textWord.setText(textWord.getText() + "Date : "
-//                            + getNode("pubDate", eElement) + "\n" + "\n" + "\n"
-//                            + "\n");
-//                }
-//            }
-//            // Close progressbar
             pDialog.dismiss();
         }
 
