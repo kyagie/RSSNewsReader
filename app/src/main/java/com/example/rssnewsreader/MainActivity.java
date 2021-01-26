@@ -119,26 +119,26 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this,dd +" "+ " RSSFeed Headlines Fetched.",
                     Toast.LENGTH_LONG).show();
 
-//            iterable(nodelist).forEach(node -> {
-//                if (node.getNodeType() == Node.ELEMENT_NODE){
-//                    Element eElement = (Element) node;
-//
-//                title.setText(title.getText() + getNode("title", eElement) + "\n" + "\n");
-//                link.setText(link.getText() + getNode("link", eElement) + "\n" + "\n");
-//
-//                }
-//                });
-            for (Node node : iterable(nodelist)) {
-                // ....
-
+            iterable(nodelist).forEach(node -> {
                 if (node.getNodeType() == Node.ELEMENT_NODE){
                     Element eElement = (Element) node;
-
+                        
                     title.setText(title.getText() + getNode("title", eElement) + "\n" + "\n");
                     link.setText(link.getText() + getNode("link", eElement) + "\n" + "\n");
 
                 }
-            }
+                });
+//            for (Node node : iterable(nodelist)) {
+//                // ....
+//
+//                if (node.getNodeType() == Node.ELEMENT_NODE){
+//                    Element eElement = (Element) node;
+//
+//                    title.setText(title.getText() + getNode("title", eElement) + "\n" + "\n");
+//                    link.setText(link.getText() + getNode("link", eElement) + "\n" + "\n");
+//
+//                }
+//            }
 
 
             pDialog.dismiss();

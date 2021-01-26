@@ -3,4 +3,7 @@
     <string name="action_1">Read Article</string>
     <string name="action_2">TTS</string>
     <string name="title">Headlines</string>
+    <string name="label">Enter RSSFeed URL</string>
+    <string name="enterurl">Enter URL of an RSS feed</string>
+    <string name="exampleurl">For example, http://rss.news.yahoo.com/rss/topstories</string>
 </resources>
