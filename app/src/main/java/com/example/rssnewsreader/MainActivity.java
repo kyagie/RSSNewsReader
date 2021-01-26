@@ -40,22 +40,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Gets URL passed in Landing Activity
+        Intent intent = getIntent();
+        String url = intent.getExtras().getString("url");
+        Toast.makeText(getApplicationContext(),"URL "+ url, Toast.LENGTH_LONG).show();
 
         if (android.os.Build.VERSION.SDK_INT > 20) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        Intent intent = getIntent();
-        String URL = intent.getExtras().getString("url");
-        Toast.makeText(getApplicationContext(),"URL "+ URL, Toast.LENGTH_LONG).show();
-
-//        uri = URL.toString();
         initVar();
 //        DownloadXMLR
         new DownloadXML().execute(uri);
 
     }
+
 
     public void initVar(){
         textWord = (TextView)findViewById(R.id.textWord);
@@ -145,16 +145,7 @@ public class MainActivity extends AppCompatActivity {
         return nValue.getNodeValue();
     }
     public void onClick(View view) {
-//            ...
         Intent intent = new Intent(this, NewsDetailsActivity.class);
-//        link = (TextView)findViewById(R.id.link);
-//        String Link = link.getText().toString();
-//        intent.putExtra("HEADLINE_URL", Link);
         startActivity(intent);
-//        String url = "https://stackoverflow.com/questions/3004515/sending-an-intent-to-browser-to-open-specific-url";
-//        Intent i = new Intent(Intent.ACTION_VIEW);
-//        i.setData(Uri.parse(url));
-//        startActivity(i);
-
     }
 }
