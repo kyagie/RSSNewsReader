@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 if (node.getNodeType() == Node.ELEMENT_NODE){
                     Element eElement = (Element) node;
                     title.setText(title.getText() + getNode("title", eElement) + "\n" + "\n");
-                    link.setText(link.getText() + getNode("link", eElement));
+//                    link.setText(link.getText() + getNode("link", eElement));
                 }
                 });
             pDialog.dismiss();
