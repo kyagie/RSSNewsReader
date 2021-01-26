@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -161,10 +163,14 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View view) {
 //            ...
         Intent intent = new Intent(this, NewsDetailsActivity.class);
-        link = (TextView)findViewById(R.id.link);
-        String Link = link.getText().toString();
-        intent.putExtra("HEADLINE_URL", Link);
+//        link = (TextView)findViewById(R.id.link);
+//        String Link = link.getText().toString();
+//        intent.putExtra("HEADLINE_URL", Link);
         startActivity(intent);
+//        String url = "https://stackoverflow.com/questions/3004515/sending-an-intent-to-browser-to-open-specific-url";
+//        Intent i = new Intent(Intent.ACTION_VIEW);
+//        i.setData(Uri.parse(url));
+//        startActivity(i);
 
     }
 }
