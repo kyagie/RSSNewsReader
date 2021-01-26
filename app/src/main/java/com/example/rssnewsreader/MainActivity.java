@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private NodeList nodelist;
     private TextView textWord, title, pubdate, link;
     ProgressDialog pDialog;
+    private String uri = "https://news.yahoo.com/rss/topstories";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +45,16 @@ public class MainActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
         Intent intent = getIntent();
-        String uri = intent.getStringExtra("uri");
+        String URL = intent.getExtras().getString("url");
+        Toast.makeText(getApplicationContext(),"URL "+ URL, Toast.LENGTH_LONG).show();
+
+//        uri = URL.toString();
         initVar();
-//        DownloadXML
+//        DownloadXMLR
         new DownloadXML().execute(uri);
 
     }
+
     public void initVar(){
         textWord = (TextView)findViewById(R.id.textWord);
         title = (TextView)findViewById(R.id.title);

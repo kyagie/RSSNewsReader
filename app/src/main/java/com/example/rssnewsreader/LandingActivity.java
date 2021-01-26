@@ -43,12 +43,15 @@ public class LandingActivity extends AppCompatActivity {
             intent.putExtra("url",URL);
             startActivity(intent);
         }else {
-            Toast.makeText(getApplicationContext(),"Invalid URL"+ URL, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Invalid URL", Toast.LENGTH_LONG).show();
         }
 
 
     }
 
+//    public void setUrl(String u){
+//
+//    }
     public void mainactivity(View view){
         if(view == containedButton){
             submitURL();
