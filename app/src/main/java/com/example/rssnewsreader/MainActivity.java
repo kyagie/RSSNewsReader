@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     Element eElement = (Element) node;
 
                     title.setText(title.getText() + getNode("title", eElement) + "\n" + "\n");
-                    link.setText(link.getText() + getNode("link", eElement) + "\n" + "\n");
+//                    link.setText(link.getText() + getNode("link", eElement) + "\n" + "\n");
 
                 }
                 });

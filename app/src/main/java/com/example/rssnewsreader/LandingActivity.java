@@ -48,7 +48,6 @@ public class LandingActivity extends AppCompatActivity {
 
 
     }
-
 //    public void setUrl(String u){
 //
 //    }
