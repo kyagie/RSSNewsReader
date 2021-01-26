@@ -14,8 +14,8 @@ public class NewsDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_details);
-//        Intent intent = getIntent();
-//        String url = intent.getStringExtra("HEADLINE_URL");
+        Intent intent = getIntent();
+        String url = intent.getStringExtra("URL");
 //
 //        TextView textView = findViewById(R.id.textView);
 //        textView.setText(url);
@@ -24,6 +24,7 @@ public class NewsDetailsActivity extends AppCompatActivity {
 
         webView = (WebView) findViewById(R.id.webView1);
         webView.getSettings().setJavaScriptEnabled(true);
+//        webView.loadUrl(url);
         webView.loadUrl("https://news.yahoo.com/biden-did-not-fact-remove-071400961.html");
 
     }
