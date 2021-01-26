@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private NodeList nodelist;
     private TextView textWord, title, pubdate, link;
     ProgressDialog pDialog;
-    private String uri = "https://news.yahoo.com/rss/topstories";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+        Intent intent = getIntent();
+        String uri = intent.getStringExtra("uri");
         initVar();
 //        DownloadXML
         new DownloadXML().execute(uri);
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             iterable(nodelist).forEach(node -> {
                 if (node.getNodeType() == Node.ELEMENT_NODE){
                     Element eElement = (Element) node;
-                        
+
                     title.setText(title.getText() + getNode("title", eElement) + "\n" + "\n");
                     link.setText(link.getText() + getNode("link", eElement) + "\n" + "\n");
 
