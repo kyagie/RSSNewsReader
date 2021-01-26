@@ -24,20 +24,26 @@ public class LandingActivity extends AppCompatActivity {
         containedButton.setOnClickListener(this::mainactivity);
 
     }
-    private boolean isValidate(){
-        filledTextField = (TextInputLayout) findViewById(R.id.filledTextField);
-        String URL = filledTextField.getEditText().toString();
-//        return  Patterns.WEB_URL.matcher(URL).matches();
-        return true;
-    }
+//    private boolean isValidate(){
+//        filledTextField = (TextInputLayout) findViewById(R.id.filledTextField);
+//        String URL = filledTextField.getEditText().toString();
+////        return  Patterns.WEB_URL.matcher(URL).matches();
+//        if (URL.matches("((http)[s]?(://).*)")){
+//            return true;
+//        }else {
+//            return false;
+//        }
+//    }
 
     public void submitURL(){
-        if (isValidate()){
+        filledTextField = (TextInputLayout) findViewById(R.id.filledTextField);
+        String URL = filledTextField.getEditText().getText().toString();
+        if (URL.matches("((http)[s]?(://).*)")){
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("url",URL);
             startActivity(intent);
         }else {
-            Toast.makeText(getApplicationContext(),"Invalid URL", Toast.LENGTH_LONG).show();
-
+            Toast.makeText(getApplicationContext(),"Invalid URL"+ URL, Toast.LENGTH_LONG).show();
         }
 
 
