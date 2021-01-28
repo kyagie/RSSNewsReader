@@ -16,16 +16,17 @@ public class NewsDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news_details);
         Intent intent = getIntent();
         String url = intent.getStringExtra("URL");
+        String urL = "https://news.yahoo.com/biden-did-not-fact-remove-071400961.html";
 //
 //        TextView textView = findViewById(R.id.textView);
 //        textView.setText(url);
 
 
-
+//Opens Link for URL passed in a webview
         webView = (WebView) findViewById(R.id.webView1);
         webView.getSettings().setJavaScriptEnabled(true);
 //        webView.loadUrl(url);
-        webView.loadUrl("https://news.yahoo.com/biden-did-not-fact-remove-071400961.html");
+        webView.loadUrl(urL);
 
     }
 }

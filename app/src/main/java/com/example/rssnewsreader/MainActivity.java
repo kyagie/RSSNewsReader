@@ -45,11 +45,13 @@ public class MainActivity extends AppCompatActivity {
         String url = intent.getExtras().getString("url");
         Toast.makeText(getApplicationContext(),"URL "+ url, Toast.LENGTH_LONG).show();
 
+        //Allows for loading of XML in the same UI thread
         if (android.os.Build.VERSION.SDK_INT > 20) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+        //Initiates components
         initVar();
 //        DownloadXMLR
         new DownloadXML().execute(uri);
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //Method lets us Iterate through the XML list
     public static Iterable<Node> iterable(final NodeList nodeList) {
         return () -> new Iterator<Node>() {
 
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // DownloadXML AsyncTask
+    //Runs a background task to load XML from a provided URL
     private class DownloadXML extends AsyncTask<String, Void, Void> {
         @Override
         protected void onPreExecute() {

@@ -24,16 +24,8 @@ public class LandingActivity extends AppCompatActivity {
         containedButton.setOnClickListener(this::mainactivity);
 
     }
-//    private boolean isValidate(){
-//        filledTextField = (TextInputLayout) findViewById(R.id.filledTextField);
-//        String URL = filledTextField.getEditText().toString();
-////        return  Patterns.WEB_URL.matcher(URL).matches();
-//        if (URL.matches("((http)[s]?(://).*)")){
-//            return true;
-//        }else {
-//            return false;
-//        }
-//    }
+//This Method is called when The Get Feeds Button is pressed.
+    //This method validates the URL typed in the text field
 
     public void submitURL(){
         filledTextField = (TextInputLayout) findViewById(R.id.filledTextField);
@@ -48,9 +40,7 @@ public class LandingActivity extends AppCompatActivity {
 
 
     }
-//    public void setUrl(String u){
-//
-//    }
+    //This method opens the Mainactivity.
     public void mainactivity(View view){
         if(view == containedButton){
             submitURL();
